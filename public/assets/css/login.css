@@ -1,0 +1,434 @@
+/*========================================================================
+login
+=========================================================================*/
+.cs_login {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+.cs_login .cs-column-wrap {
+  position: relative;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.leftBox_layout {
+  width: 59%;
+}
+
+.rightBox_layout {
+  flex: 1;
+}
+.login-left-img img{
+  max-width: 510px;
+  width: 100%;
+}
+@media only screen and (max-width: 991px) {
+  .cs_login .cs-column-wrap {
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+    min-height: auto;
+  }
+  
+}
+@media only screen and (max-width: 767px) {
+  .cs_login .cs-column-wrap {
+    padding-top: 6vh;
+    padding-bottom: 6vh;
+  }
+  .cs-animated-img {
+    display: none;
+  }
+  .leftBox_layout {
+    width: 100%;
+}
+
+.rightBox_layout {
+    flex: 100%;
+}
+}
+@media only screen and (max-width: 575px) {
+  .cs_login .cs-column-wrap {
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+  }
+}
+.cs_login .cs-shape {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  opacity: 0.28;
+}
+.cs_login .cs-shape .login-shape-img img {
+  max-width: 550px;
+}
+.cs_login .cs-animated-img {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: 50px;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.cs_login .cs-logo {
+  margin-bottom: 50px;
+  display: block;
+  max-width: 300px;
+}
+.cs_login .cs-main-title {
+  width: 100%;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--headingColor);
+  margin-bottom: 20px;
+}
+@media only screen and (max-width: 991px) {
+  .cs_login .cs-main-title {
+    font-size: 36px;
+  }
+  body .cs_login .cs-main-title, 
+  body .cs_login .cs-switcher-description1{
+    max-width: 100%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .cs_login .cs-main-title {
+    font-size: 32px;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .cs_login .cs-main-title {
+    font-size: 28px;
+  }
+}
+.cs_login .cs-switcher-description1 {
+  color: var(--SecondaryTextColor);
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+.cs_login .cs-switcher-description1 .cs-switcher-text {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 600;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.cs_login .cs-switcher-description2 .cs-switcher-text {
+  color: var(--GreyTextColor);
+  font-size: 14px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.cs_login .cs-switcher-description3 {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.cs_login .cs-switcher-description3 .cs-switcher-text {
+  font-size: 16px;
+  font-weight: 500;
+  display: inline-block;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.cs_login .cs-qr-code {
+  display: inline-block;
+  max-width: 170px;
+}
+.cs_login  .cs-qr-code img{
+  height:150px;
+}
+.cs_login .cs-qr-code img {
+  -webkit-box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
+  background-color: var(--bgWhite);
+  padding: 0;
+  border: 1px solid var(--borderColor);
+}
+@media only screen and (max-width: 575px) {
+  .cs_login .cs-qr-code img {
+    padding: 5px;
+  }
+}
+.cs_login .cs-form {
+  margin-top: 10px;
+}
+.cs_login .cs-form .cs-label {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.cs_login .cs-form .form-group {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 25px;
+}
+.cs_login .cs-form .form-group .field-icon {
+  position: absolute;
+  z-index: 1;
+  right: 26px;
+  bottom: 24px;
+  font-size: 14px;
+  color: var(--InputBoxIcon);
+}
+.cs_login .cs-form .form-group .field-icon:before {
+  padding: 17px 10px;
+}
+.cs_login .cs-form .form-control {
+  border-radius: 10px;
+  background-color: var(--InputBgColor);
+  min-height: 60px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid var(--InputBgColor);
+  padding: 10px 20px;
+  color: var(--InputTextColor);
+  font-size: 14px;
+}
+@media only screen and (max-width: 767px) {
+  .cs_login .cs-form .form-control {
+    min-height: 50px;
+  }
+}
+
+.cs_login .cs-form input:-moz-placeholder,
+.cs_login4 .cs-form input:-ms-input-placeholder,
+.cs_login .cs-form input::-moz-placeholder ,
+.cs_login .cs-form input::-webkit-input-placeholder  {
+  color: var(--PlaceholderColor);
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.cs_login .cs-form .cs-checkbox-box {
+  margin-bottom: 25px;
+}
+.cs_login .cs-form .cs-checkbox-box label {
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
+}
+.cs_login .cs-form .cs-checkbox-box label:before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 4px;
+  left: 0;
+  right: 0;
+  border: 1px solid;
+  border-color: var(--borderColor);
+  border-radius: 3px;
+  background-color: var(--bgWhite);
+  -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+  -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+  transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+.cs_login .cs-form .cs-checkbox-box label:after {
+  position: absolute;
+  font-size: 10px;
+  /* color: #555555; */
+}
+.cs_login .cs-form .cs-checkbox-box input[type="checkbox"] {
+  display: none;
+}
+.cs_login .cs-form .cs-checkbox-box input[type="checkbox"]:checked + label::after {
+  font-family: 'Font Awesome 5 Free';
+  content: "\f00c";
+  font-weight: 900;
+  color: var(--textWhite);
+  left: 0;
+  right: 0;
+  top: 4px;
+  width: 16px;
+  text-align: center;
+}
+.cs_login .cs-form .cs-checkbox-box input[type="checkbox"]:checked + label::before {
+  background-color: var(--PrimaryBgColor);
+  border-color: var(--PrimaryBgColor);
+}
+.cs_login .cs-form .cs-otp-logo {
+  margin-bottom: 30px;
+  display: block;
+}
+.cs_login .cs-form .cs-otp-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.cs_login .cs-form .cs-otp-row .cs-otp-col {
+  min-height: 50px;
+  padding: 5px;
+  text-align: center;
+  margin-right: 15px;
+  -ms-flex-preferred-size: 0;
+  flex-basis: 0;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+.cs_login .cs-form .cs-otp-row .cs-otp-col:last-child {
+  margin-right: 0;
+}
+.cs_login .cs-form .cs-otp-btn {
+  margin-bottom: 20px;
+}
+.cs_login .terms-link {
+  display: inline-block;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.cs_login .cs-btn-fill {
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 500;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: none;
+  border: 0;
+  color: var(--textWhite);
+  border-radius: 10px;
+  background-color: var(--btnPrimaryBgColor);
+  padding: 12px 36px;
+  width: 100%;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.cs_login .cs-btn-fill:hover {
+  background-color: var(--btnPrimaryBgHoverColor);
+}
+.cs_login .cs-btn-fill:focus {
+  outline: none;
+}
+@media only screen and (max-width: 767px) {
+  .cs_login .cs-btn-fill {
+    font-size: 16px;
+    padding: 11px 30px;
+  }
+}
+.cs_login .cs-style-line {
+  overflow: hidden;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.cs_login .cs-style-line span {
+  text-align: center;
+  font-size: 15px;
+  color: var(--GreyTextColor);
+  display: inline-block;
+  position: relative;
+  padding: 0 25px;
+  z-index: 1;
+}
+.cs_login .cs-style-line span:before {
+  display: inline-block;
+  content: "";
+  height: 2px;
+  width: 100%;
+  background-color:var(--borderColor);
+  left: 100%;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  position: absolute;
+  z-index: 1;
+}
+.cs_login .cs-style-line span:after {
+  display: inline-block;
+  content: "";
+  height: 2px;
+  width: 100%;
+  background-color: var(--borderColor);
+  right: 100%;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  position: absolute;
+  z-index: 1;
+}
+.cs_login ul.cs-socials {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-right: -5px;
+  margin-left: -5px;
+}
+.cs_login ul.cs-socials li {
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 10px;
+}
+.cs_login ul.cs-socials li a {
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 20px;
+  height: 60px;
+  width: 80px;
+  border: 1px solid;
+  border-color: var(--borderColor);
+  background-color: var(--bgWhite);
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+@media only screen and (max-width: 767px) {
+  .cs_login ul.cs-socials li a {
+    font-size: 18px;
+    height: 50px;
+    width: 60px;
+  }
+}
+.cs_login ul.cs-socials li a:hover {
+  background-color: var(--bgWhite);
+  border-color: var(--bgWhite);
+  -webkit-box-shadow: 0 0 62px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 62px 0 rgba(0, 0, 0, 0.1);
+}
+.cs_login ul.cs-socials li.cs-google a {
+  color: var(--googleTextColor);
+}
+.cs_login ul.cs-socials li.cs-apple a {
+  color: var(--AppleTextColor);
+}
+.cs_login ul.cs-socials li.cs-facebook a {
+  color: var(--facebookTextColor);
+}
