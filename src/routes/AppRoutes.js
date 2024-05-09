@@ -64,10 +64,8 @@ export default function AppRoutes() {
   };
 
   const NonProtectedRoute = (props) => {
-    debugger
     if (isAuthenticated) {
-      debugger
-      return <Navigate to="/" replace />;
+        return <Navigate to="/" replace />;
     }
     return props.children;
   };

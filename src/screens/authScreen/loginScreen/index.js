@@ -11,6 +11,7 @@ import { AuthContext } from "../../../context/authContext";
 import { useTransition } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { RoutePath } from "../../../routes/RoutePath";
+import { GoogleLogin, GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
 
 export default function LoginScreen() {
   const { login } = useContext(AuthContext);
@@ -55,9 +56,21 @@ export default function LoginScreen() {
     },
   });
 
+  const loginO=()=>{
+    debugger
+    console.log("loginO")
+  }
+
+  // const loginO = useGoogleLogin({
+  //   onSuccess: tokenResponse => console.log(tokenResponse),
+  // });
+
 
   return (
-    
+    <>
+
+   
+
     <section class="cs-template-animation cs_login loaded"
     style={{ backgroundImage: ImagesUrl.loginbg }}
     >
@@ -164,19 +177,33 @@ export default function LoginScreen() {
                         </div>
                         <ul class="cs-socials">
                             <li class="cs-google">
+                              
                                 <a href="/login" title="google"><i class="fab fa-google-plus-g"></i></a>
                             </li>
                             <li class="cs-apple">
                                 <a href="/login" title="apple"><i class="fab fa-apple"></i></a>
                             </li>
                             <li class="cs-facebook">
-                                <a href="/login" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="/login" onClick={() => loginO()} title="Facebook"><i class="fab fa-facebook-f"></i></a>
                             </li>
                         </ul>
+                        <div className="offset-4">
+                        <GoogleOAuthProvider clientId="271819893089-usetaavr7opic36lm4h0ql1vrramtvdv.apps.googleusercontent.com">
+    <GoogleLogin
+  onSuccess={credentialResponse => {
+    console.log(credentialResponse,"GoogleLogin credentialResponse");
+  }}
+  onError={() => {
+    console.log('Login Failed');
+  }}
+/>
+    </GoogleOAuthProvider>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    </>
   );
 }
