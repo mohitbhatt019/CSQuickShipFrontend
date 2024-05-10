@@ -12,9 +12,12 @@ import { useTransition } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { RoutePath } from "../../../routes/RoutePath";
 import { GoogleLogin, GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
+import { useOidc, useOidcAccessToken, useOidcUser } from "@axa-fr/react-oidc";
+import axios from "axios";
 
-export default function LoginScreen() {
-  const { login } = useContext(AuthContext);
+export default function LoginScreen({ setUserState, username }) {
+
+  const { loginAuthContext } = useContext(AuthContext);
   const { t } = useTransition();
   const nav = useNavigate();
  const {
@@ -45,7 +48,7 @@ export default function LoginScreen() {
           const response = await adminLoginMutateAsync(data);
           if (response) {
             toast.success("User Authenticated Sucessfully");
-            login(response);
+            loginAuthContext(response);
             resetForm();
             nav(RoutePath.ORDER.path)
            
@@ -56,10 +59,34 @@ export default function LoginScreen() {
     },
   });
 
-  const loginO=()=>{
-    debugger
-    console.log("loginO")
+
+  
+  const { login, logout, renewTokens, isAuthenticated } = useOidc();
+  const { accessToken, accessTokenPayload } = useOidcAccessToken();
+  const { oidcUser, oidcUserLoadingState } = useOidcUser();
+
+  const getLabel = () => {
+    axios.post("https://localhost:7192/label/api/getlabel",{},
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        }
+      }
+    );
+    console.log(accessTokenPayload);
+    console.log(oidcUserLoadingState)
   }
+
+  
+//   useEffect(() => {
+//     // Reload the page only if isAuthenticated changed and it's not in the initial loading state
+//     if (typeof isAuthenticated !== 'undefined' && !oidcUserLoadingState) {
+//       loginAuthContext(true);
+
+//         window.location.reload();
+//     }
+// }, [isAuthenticated, oidcUserLoadingState]);
+
 
   // const loginO = useGoogleLogin({
   //   onSuccess: tokenResponse => console.log(tokenResponse),
@@ -168,6 +195,41 @@ export default function LoginScreen() {
                     <button type="submit" class="cs-btn-fill">
                       Sign In 
                     </button>
+
+                    <button>
+                    
+           {!isAuthenticated ? <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => login()}
+
+            >
+              Login
+            </button> :             <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => logout()}
+
+            >
+              Logout
+            </button>} 
+
+          
+          
+            
+          
+ 
+                     
+          {/* {isAuthenticated && (
+            <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => renewTokens()}
+            >
+            renewTokens
+            </button>
+          )} */}
+                    </button>
                   </div>
                 </form>
               </div>
@@ -184,20 +246,20 @@ export default function LoginScreen() {
                                 <a href="/login" title="apple"><i class="fab fa-apple"></i></a>
                             </li>
                             <li class="cs-facebook">
-                                <a href="/login" onClick={() => loginO()} title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="/login"  title="Facebook"><i class="fab fa-facebook-f"></i></a>
                             </li>
                         </ul>
                         <div className="offset-4">
                         <GoogleOAuthProvider clientId="271819893089-usetaavr7opic36lm4h0ql1vrramtvdv.apps.googleusercontent.com">
-    <GoogleLogin
-  onSuccess={credentialResponse => {
-    console.log(credentialResponse,"GoogleLogin credentialResponse");
-  }}
-  onError={() => {
-    console.log('Login Failed');
-  }}
-/>
-    </GoogleOAuthProvider>
+                            <GoogleLogin
+                                onSuccess={credentialResponse => {
+                                  console.log(credentialResponse,"GoogleLogin credentialResponse");
+                                }}
+                                onError={() => {
+                                  console.log('Login Failed');
+                                }}
+                             />
+                        </GoogleOAuthProvider>
                         </div>
                     </div>
                 </div>

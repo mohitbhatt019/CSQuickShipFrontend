@@ -4,11 +4,13 @@ import { RoutePath } from "./RoutePath";
 import GenericPage from "../genericpage";
 import userGlobalConfig from "../constants/globalConfig";
 import { AuthContext } from "../context/authContext";
+import { useOidc } from "@axa-fr/react-oidc";
 
 export default function AppRoutes() {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticatedContext } = useContext(AuthContext);
+  const { login, logout, renewTokens, isAuthenticated } = useOidc();
+
   function publicRoutes() {
-    debugger
     const routes = [
       RoutePath.LOGIN,
       RoutePath.SIGNUP,
@@ -25,8 +27,6 @@ export default function AppRoutes() {
   }
 
   function privateRoutes() {
-    debugger
-
     const routes = [
       RoutePath.DASHBOARD,
       RoutePath.ABOUT,
@@ -53,9 +53,7 @@ export default function AppRoutes() {
   }
 
   const ProtectedRoute = (props) => {
-    debugger
     if (!isAuthenticated) {
-      debugger
       // verify the user is authenticated or not
       return <Navigate to="/login" replace />;
     }

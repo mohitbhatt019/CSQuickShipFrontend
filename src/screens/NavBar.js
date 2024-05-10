@@ -1,17 +1,25 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AuthContext } from '../context/authContext';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '../routes/RoutePath';
+import { useOidc, useOidcUser } from '@axa-fr/react-oidc';
 
 function NavBar() {
 
-  const { logout } = useContext(AuthContext);
+  const { logout2 } = useContext(AuthContext);
   const nav = useNavigate();
+  const { login, logout, renewTokens, isAuthenticated } = useOidc();
+  const { oidcUser, oidcUserLoadingState } = useOidcUser();
+
+  // useEffect(() => {
+  //   debugger
+  //   // Reload the page only if isAuthenticated changed from false to true
+  //   if (isAuthenticated && oidcUserLoadingState!=null) {
+  //     window.location.reload();
+  //   }
+  // }, [isAuthenticated, oidcUserLoadingState]);
 
 
- function name(params) {
-  
- }
   return (
     <div>
  <nav class="navbar navbar-expand-lg" style={{backgroundColor:"grey"}}>
@@ -40,11 +48,31 @@ function NavBar() {
 
   <div className='offset-7'>
         
-          <button className='btn btn-primary' onClick={() => {
+
+  {!isAuthenticated ? <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => login()}
+
+            >
+              Login
+            </button> :             <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => logout()
+              
+            }
+
+            >
+              Logout
+            </button>} 
+
+            
+          {/* <button className='btn btn-primary' onClick={() => {
                                   logout();
                                   nav(RoutePath.LOGIN.path);
                                 }}
-                                > Logout</button>
+                                > Logout</button> */}
     </div>
 </nav>
     </div>
