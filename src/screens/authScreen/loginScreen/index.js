@@ -14,6 +14,8 @@ import { RoutePath } from "../../../routes/RoutePath";
 import { GoogleLogin, GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
 import { useOidc, useOidcAccessToken, useOidcUser } from "@axa-fr/react-oidc";
 import axios from "axios";
+import { FacebookLoginButton } from "react-social-login-buttons";
+import FacebookLogin from 'react-facebook-login';
 
 export default function LoginScreen({ setUserState, username }) {
 
@@ -64,6 +66,10 @@ export default function LoginScreen({ setUserState, username }) {
   const { login, logout, renewTokens, isAuthenticated } = useOidc();
   const { accessToken, accessTokenPayload } = useOidcAccessToken();
   const { oidcUser, oidcUserLoadingState } = useOidcUser();
+  
+  useEffect(()=>{
+    login()
+  })
 
   const getLabel = () => {
     axios.post("https://localhost:7192/label/api/getlabel",{},
@@ -77,6 +83,35 @@ export default function LoginScreen({ setUserState, username }) {
     console.log(oidcUserLoadingState)
   }
 
+
+  const decodeGoogleToken=(credentialResponse)=>{
+    debugger
+    console.log(credentialResponse.credential,"credentialResponse.credential;")
+    const jwtToken = credentialResponse.credential;
+
+const parseJwt = (token) => {
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(
+    atob(base64)
+      .split('')
+      .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+      .join('')
+  );
+console.log(JSON.parse(jsonPayload),("JSON.parse(jsonPayload)"))
+  return JSON.parse(jsonPayload);
+};
+
+const decodedToken = parseJwt(jwtToken);
+console.log(decodedToken);
+  }
+
+  const responseFacebook = (response) => {
+    debugger
+    console.log(response,"responseFacebook");
+  }
+   
+  
   
 //   useEffect(() => {
 //     // Reload the page only if isAuthenticated changed and it's not in the initial loading state
@@ -253,6 +288,7 @@ export default function LoginScreen({ setUserState, username }) {
                         <GoogleOAuthProvider clientId="271819893089-usetaavr7opic36lm4h0ql1vrramtvdv.apps.googleusercontent.com">
                             <GoogleLogin
                                 onSuccess={credentialResponse => {
+                                  decodeGoogleToken(credentialResponse);
                                   console.log(credentialResponse,"GoogleLogin credentialResponse");
                                 }}
                                 onError={() => {
@@ -260,6 +296,13 @@ export default function LoginScreen({ setUserState, username }) {
                                 }}
                              />
                         </GoogleOAuthProvider>
+
+                        <FacebookLogin
+                            appId="1833031190441688"
+                            autoLoad={true}
+                            fields="name,email,picture"
+                            // onClick={componentClicked}
+                            callback={responseFacebook} />
                         </div>
                     </div>
                 </div>

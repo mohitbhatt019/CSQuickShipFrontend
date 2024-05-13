@@ -3,6 +3,7 @@ import { AuthContext } from '../context/authContext';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '../routes/RoutePath';
 import { useOidc, useOidcUser } from '@axa-fr/react-oidc';
+import axios from 'axios';
 
 function NavBar() {
 
@@ -18,7 +19,23 @@ function NavBar() {
   //     window.location.reload();
   //   }
   // }, [isAuthenticated, oidcUserLoadingState]);
-
+  const clearCookiesFromAuthServer = async () => {
+    debugger
+    try {
+      debugger
+      // Make a GET request to your logout endpoint
+      const response = await axios.delete('https://localhost:56255/Home/Logout');
+  
+      // Check if the request was successful
+      if (response.status === 200) {
+        console.log('Logout successful');
+      } else {
+        console.error('Logout failed');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
 
   return (
     <div>
@@ -49,23 +66,26 @@ function NavBar() {
   <div className='offset-7'>
         
 
-  {!isAuthenticated ? <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => login()}
-
-            >
-              Login
-            </button> :             <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => logout()
-              
-            }
-
-            >
-              Logout
-            </button>} 
+  {!isAuthenticated ? (
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => login()}
+        >
+          Login
+        </button>
+      ) : (
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => {
+            logout();
+            clearCookiesFromAuthServer();
+          }}
+        >
+          Logout
+        </button>
+      )}
 
             
           {/* <button className='btn btn-primary' onClick={() => {
