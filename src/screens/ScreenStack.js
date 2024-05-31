@@ -15,6 +15,7 @@ import ProductDetails from "./sidebarComponents/ProductDetails"
 import CompleteOrderDetails from "./sidebarComponents/CompleteOrderDetails"
 import CarrierCharges from "./sidebarComponents/CarrierCharges"
 import ShippingRule from "./sidebarComponents/ShippingRule"
+import authenticateUrl from "./authScreen/authenticateUrl/authenticateUrl"
 
 const ScreenStack = {
   LoginScreen: LoginScreen,
@@ -33,7 +34,8 @@ const ScreenStack = {
   ProductDetails:ProductDetails,
   CompleteOrderDetails:CompleteOrderDetails,
   CarrierCharges:CarrierCharges,
-  ShippingRule:ShippingRule
+  ShippingRule:ShippingRule,
+  authenticateUrl:authenticateUrl
 }
 
 export default ScreenStack

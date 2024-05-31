@@ -10,6 +10,14 @@ const RoutePath = {
         title: "Login Page",
         type: "non-private",
       },
+      AuthenticateUrl: {
+        accessible: true,
+        component: <ScreenStack.authenticateUrl />,
+        exact: true,
+        path : "/authenticateUrl/:id",
+        title: "authenticateUrl",
+        type: "non-private",
+      },
       ForgetPassword: {
         accessible: true,
         component: <ScreenStack.ForgetPassword />,
@@ -24,6 +32,14 @@ const RoutePath = {
         exact: true,
         path: "/signup",
         title: "signup Page",
+        type: "non-private",
+      },
+      Authenticate: {
+        accessible: true,
+        component: <ScreenStack.LoginScreen />,
+        exact: true,
+        path: "/login",
+        title: "Login Page",
         type: "non-private",
       },
       DASHBOARD: {

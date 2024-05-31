@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
+    
     // Get the value of "oidc.default" from session storage
     const oidcDefault = sessionStorage.getItem("oidc.default");
     
@@ -28,13 +29,11 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (token) => {
-    
     localStorage.setItem(userGlobalConfig.TOKEN, token.data.token);
     setIsAuthenticated(true);
   };
 
   const logout = () => {
-    
     localStorage.removeItem(userGlobalConfig.TOKEN);
     setIsAuthenticated(false);
   };

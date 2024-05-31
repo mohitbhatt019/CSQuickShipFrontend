@@ -67,25 +67,14 @@ export default function LoginScreen({ setUserState, username }) {
   const { accessToken, accessTokenPayload } = useOidcAccessToken();
   const { oidcUser, oidcUserLoadingState } = useOidcUser();
   
-  useEffect(()=>{
-    login()
-  })
-
-  const getLabel = () => {
-    axios.post("https://localhost:7192/label/api/getlabel",{},
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        }
-      }
-    );
-    console.log(accessTokenPayload);
-    console.log(oidcUserLoadingState)
-  }
-
+ useEffect(()=>{
+     if(!isAuthenticated){
+       login('/')
+       //const oidcData = sessionStorage.getItem('oidc.default');
+     }
+   },[])
 
   const decodeGoogleToken=(credentialResponse)=>{
-    debugger
     console.log(credentialResponse.credential,"credentialResponse.credential;")
     const jwtToken = credentialResponse.credential;
 
@@ -107,37 +96,23 @@ console.log(decodedToken);
   }
 
   const responseFacebook = (response) => {
-    debugger
     console.log(response,"responseFacebook");
   }
    
   
   
-//   useEffect(() => {
-//     // Reload the page only if isAuthenticated changed and it's not in the initial loading state
-//     if (typeof isAuthenticated !== 'undefined' && !oidcUserLoadingState) {
-//       loginAuthContext(true);
-
-//         window.location.reload();
-//     }
-// }, [isAuthenticated, oidcUserLoadingState]);
-
-
-  // const loginO = useGoogleLogin({
-  //   onSuccess: tokenResponse => console.log(tokenResponse),
-  // });
 
 
   return (
     <>
-
+   
    
 
     <section class="cs-template-animation cs_login loaded"
     style={{ backgroundImage: ImagesUrl.loginbg }}
     >
-       <div class="cs-shape">
-            <div class="cs-transformX-L-50 cs-transition-delay-3 login-shape-img">
+        <div class="cs-shape">
+              <div class="cs-transformX-L-50 cs-transition-delay-3 login-shape-img">
                 <img src={ImagesUrl.shape1} alt="Shape"/>
             </div>
         </div>
@@ -297,12 +272,12 @@ console.log(decodedToken);
                              />
                         </GoogleOAuthProvider>
 
-                        <FacebookLogin
+                        {/* <FacebookLogin
                             appId="1833031190441688"
                             autoLoad={true}
                             fields="name,email,picture"
                             // onClick={componentClicked}
-                            callback={responseFacebook} />
+                            callback={responseFacebook} /> */}
                         </div>
                     </div>
                 </div>

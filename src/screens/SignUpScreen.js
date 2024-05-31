@@ -50,7 +50,6 @@ export default function SignUpScreen() {
       };
       console.log(data);
         try {
-          debugger
           const response = await adminLoginMutateAsync(data);
           if (response) {
             toast.success("User Registered Sucessfully");

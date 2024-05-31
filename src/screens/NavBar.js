@@ -1,42 +1,51 @@
 import React, { useContext, useEffect } from 'react'
 import { AuthContext } from '../context/authContext';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { RoutePath } from '../routes/RoutePath';
 import { useOidc, useOidcUser } from '@axa-fr/react-oidc';
 import axios from 'axios';
 
 function NavBar() {
-
   const { logout2 } = useContext(AuthContext);
   const nav = useNavigate();
   const { login, logout, renewTokens, isAuthenticated } = useOidc();
   const { oidcUser, oidcUserLoadingState } = useOidcUser();
 
-  // useEffect(() => {
-  //   debugger
-  //   // Reload the page only if isAuthenticated changed from false to true
-  //   if (isAuthenticated && oidcUserLoadingState!=null) {
-  //     window.location.reload();
-  //   }
-  // }, [isAuthenticated, oidcUserLoadingState]);
-  const clearCookiesFromAuthServer = async () => {
-    debugger
-    try {
-      debugger
-      // Make a GET request to your logout endpoint
-      const response = await axios.delete('https://localhost:56255/Home/Logout');
-  
-      // Check if the request was successful
-      if (response.status === 200) {
-        console.log('Logout successful');
-      } else {
-        console.error('Logout failed');
+  useEffect(()=>{
+    if(isAuthenticated){
+      const oidcData = sessionStorage.getItem('oidc.default');
+   
+      if (oidcData) {
+        // Step 2: Parse the JSON string to an object
+        const parsedData = JSON.parse(oidcData);
+        
+        // Step 3: Extract the accessToken
+        const accessToken = parsedData.tokens.accessToken;
+        
+        // Step 4: Set the accessToken in local storage
+        localStorage.setItem('accessToken', accessToken);
       }
-    } catch (error) {
-      console.error('An error occurred:', error);
     }
-  };
+    else{
+      localStorage.setItem('accessToken', null);
 
+    }
+
+  },[isAuthenticated])
+
+
+
+  useEffect(()=>{
+    if(!isAuthenticated){
+      login('/')
+    }
+
+  },[])
+
+  const clearLocalStorage=async()=>{
+        localStorage.setItem('accessToken', null);
+        var data = await axios.delete("https://localhost:56255/Home/Logout")
+  }
   return (
     <div>
  <nav class="navbar navbar-expand-lg" style={{backgroundColor:"grey"}}>
@@ -63,7 +72,7 @@ function NavBar() {
     </ul>
   </div>
 
-  <div className='offset-7'>
+  <div >
         
 
   {!isAuthenticated ? (
@@ -79,8 +88,8 @@ function NavBar() {
           type="button"
           className="btn btn-primary"
           onClick={() => {
-            logout();
-            clearCookiesFromAuthServer();
+            clearLocalStorage();
+            logout('/login');
           }}
         >
           Logout
@@ -88,11 +97,7 @@ function NavBar() {
       )}
 
             
-          {/* <button className='btn btn-primary' onClick={() => {
-                                  logout();
-                                  nav(RoutePath.LOGIN.path);
-                                }}
-                                > Logout</button> */}
+
     </div>
 </nav>
     </div>

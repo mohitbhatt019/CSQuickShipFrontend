@@ -13,7 +13,6 @@ import axios from 'axios';
 
 function App() {
   const queryClient = new QueryClient();
-
   const configuration = {
     client_id: '2',
     client_secret: "123456789",

@@ -15,6 +15,7 @@ export default function AppRoutes() {
       RoutePath.LOGIN,
       RoutePath.SIGNUP,
       RoutePath.ForgetPassword,
+      RoutePath.AuthenticateUrl
     ];
     return routes.map((route, index) => (
       
@@ -55,7 +56,7 @@ export default function AppRoutes() {
   const ProtectedRoute = (props) => {
     if (!isAuthenticated) {
       // verify the user is authenticated or not
-      return <Navigate to="/login" replace />;
+       return <Navigate to="/login" replace />;
     }
     
     return <GenericPage> {props.children}</GenericPage>;
@@ -63,7 +64,7 @@ export default function AppRoutes() {
 
   const NonProtectedRoute = (props) => {
     if (isAuthenticated) {
-        return <Navigate to="/" replace />;
+         return <Navigate to="/" replace />;
     }
     return props.children;
   };
